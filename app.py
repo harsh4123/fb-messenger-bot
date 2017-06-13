@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-
+from sultan.api import Sultan
 import requests
 from flask import Flask, request
 
@@ -92,7 +92,8 @@ def bot_check(sender_id,message):
     elif (what(message)):
         m=what(message)
     elif(cmd(message)):
-        m="doing as requested"
+        with Sultan.load() as f:
+            m=" ".join(f.ls().run())
     send_message(sender_id,m)
 
 
@@ -112,7 +113,9 @@ def what(message):
                 return "what do u mean  by "+message.join(" ")
 
 def cmd(message):
-    os.system("ls")
+    with Sultan.load() as f:
+        return " ".join(f.ls().run())
+
 
 
 
