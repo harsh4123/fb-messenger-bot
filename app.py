@@ -110,7 +110,7 @@ def what(message):
     for i in what :
         for j in message :
             if(i==j):
-                return "what do u mean  by "+message.join(" ")
+                return "what do u mean  by "+" ".join(message)
 
 def cmd(message):
     with Sultan.load() as f:
