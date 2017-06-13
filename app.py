@@ -99,6 +99,8 @@ def bot_check(sender_id,message):
         m=ls(message)
     elif(store(message)):
         m=store(message)
+    elif(extract(message)):
+        m=extract(message)
     else:
         m="shall i google it"
     send_message(sender_id,m)
@@ -135,6 +137,9 @@ def store(message):
     if(message[0]=="save"):
         a[message[1]]=message[2]
         return "info saved !!"
+def extract(message):
+    if(message[0]=="get"):
+        return "info about "+message[0]+" is "+a[message[1]]
 
 
 
