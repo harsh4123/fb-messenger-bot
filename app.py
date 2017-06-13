@@ -44,7 +44,7 @@ def webhook():
                     bot_check(sender_id, message_text)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
-                    pass
+                        pass
 
                 if messaging_event.get("optin"):  # optin confirmation
                     pass
