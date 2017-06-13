@@ -86,10 +86,31 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 def bot_check(sender_id,message):
-	hello=["hello","hi","hlo","hllo"]
-	message=message.split(" ")
-	for i in hello :
-		for j in message :
-			if(i==j):
-				send_message(sender_id,"hi , good to ee u")
+
+    if(!c=hello(message)):
+        m=c
+    elif (!c=what(message)):
+        m=c
+    send_message(sender_id,c)
+
+
+def hello(message):
+    hello=["hello","hi","hlo","hllo"]
+    message=message.split(" ")
+    for i in hello :
+        for j in message :
+            if(i==j):
+                return "hi , good to see u"
+def what(message):
+    what=['what','why','how','does']
+    message=message.split(" ")
+    for i in what :
+        for j in message :
+            if(i==j):
+                return "what do u mean  by "+message
+
+
+
+            
+
 
