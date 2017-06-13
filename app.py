@@ -1,9 +1,11 @@
+
 import os
 import sys
 import json
 from sultan.api import Sultan
 import requests
 from flask import Flask, request
+import commands
 
 app = Flask(__name__)
 
@@ -91,9 +93,8 @@ def bot_check(sender_id,message):
         m=hello(message)
     elif (what(message)):
         m=what(message)
-    elif(cmd(message)):
-        with Sultan.load() as f:
-            m=" ".join(f.ls().run())
+    elif(cmd(message.split(" ")[0])):
+        m=apply_command(message)
     send_message(sender_id,m)
 
 
@@ -105,7 +106,7 @@ def hello(message):
             if(i==j):
                 return "hi , good to see u"
 def what(message):
-    what=['what','why','how','does','?']
+    what=['what','why','how','who','?']
     message=message.split(" ")
     for i in what :
         for j in message :
@@ -113,8 +114,11 @@ def what(message):
                 return "what do u mean  by "+" ".join(message)
 
 def cmd(message):
-    with Sultan.load() as f:
-        return " ".join(f.ls().run())
+    if("command"==message):
+        return 1
+def apply_command(message):
+   return commands.getoutput(" ".join(message.split(" ")[1:]))
+    
 
 
 
