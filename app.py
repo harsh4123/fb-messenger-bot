@@ -87,10 +87,10 @@ if __name__ == '__main__':
 
 def bot_check(sender_id,message):
 
-    if(!c=hello(message)):
-        m=c
-    elif (!c=what(message)):
-        m=c
+    if(hello(message)):
+        m=hello(message)
+    elif (what(message)):
+        m=what(message)
     send_message(sender_id,c)
 
 
@@ -102,7 +102,7 @@ def hello(message):
             if(i==j):
                 return "hi , good to see u"
 def what(message):
-    what=['what','why','how','does']
+    what=['what','why','how','does','?']
     message=message.split(" ")
     for i in what :
         for j in message :
