@@ -21,7 +21,7 @@ def verify():
 
     return "Hello world", 200
 
-
+a={}
 @app.route('/', methods=['POST'])
 def webhook():
 
@@ -41,7 +41,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    bot_check(sender_id, message_text)
+                    bot_check(sender_id, message_text.lower().split(" "))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -93,23 +93,26 @@ def bot_check(sender_id,message):
         m=hello(message)
     elif (what(message)):
         m=what(message)
-    elif(cmd(message.split(" ")[0])):
+    elif(cmd(message[0])):
         m=apply_command(message)
     elif("sultan"==cmd(message)):
         m=ls(message)
+    elif(store(message)):
+        m=store(message)
+    else:
+        m="shall i google it"
     send_message(sender_id,m)
 
 
 def hello(message):
     hello=["hello","hi","hlo","hllo"]
-    message=message.split(" ")
+    
     for i in hello :
         for j in message :
             if(i==j):
                 return "hi , good to see u"
 def what(message):
     what=['what','why','how','who','?']
-    message=message.split(" ")
     for i in what :
         for j in message :
             if(i==j):
@@ -118,18 +121,20 @@ def what(message):
 def cmd(message):
     if("command"==message):
         return 1
-    else:
+    elif "sultan"==message:
         return message
 def apply_command(message):
-   return commands.getoutput(" ".join(message.split(" ")[1:]))
+   return commands.getoutput(" ".join(message[1:]))
 
 def ls(message):
-    mes=message.split(" ")
-    if("ls"==mes[1]):
-        with Sultan.load() as f:
-            return " ".join(f.ls(message.split(" ")[2:]).run())
     
-
+    if("ls"==message[1]):
+        with Sultan.load() as f:
+            return " ".join(f.ls(message[2:]).run())
+def store(message):
+    if(message[0]=="save"):
+        a[message[1]]=message[2]
+        return "info saved !!"
 
 
 
