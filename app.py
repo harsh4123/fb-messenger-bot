@@ -95,7 +95,7 @@ def bot_check(sender_id,message):
         m=what(message)
     elif(cmd(message.split(" ")[0])):
         m=apply_command(message)
-    elif(ls(message)):
+    elif("sultan"==cmd(message)):
         m=ls(message)
     send_message(sender_id,m)
 
@@ -118,12 +118,16 @@ def what(message):
 def cmd(message):
     if("command"==message):
         return 1
+    else:
+        return message
 def apply_command(message):
    return commands.getoutput(" ".join(message.split(" ")[1:]))
 
 def ls(message):
-    with Sultan.load() as f:
-        return " ".join(f.ls(message.split(" ")[2:]).run())
+    mes=message.split(" ")
+    if("ls"==mes[1]):
+        with Sultan.load() as f:
+            return " ".join(f.ls(message.split(" ")[2:]).run())
     
 
 
