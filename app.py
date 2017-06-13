@@ -91,7 +91,7 @@ def bot_check(sender_id,message):
         m=hello(message)
     elif (what(message)):
         m=what(message)
-    send_message(sender_id,c)
+    send_message(sender_id,m)
 
 
 def hello(message):
