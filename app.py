@@ -41,7 +41,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    bot_check(sender_id, message_text.lower().split(" "))
+                    bot_check(sender_id, message_text.lower())
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -101,6 +101,8 @@ def bot_check(sender_id,message):
         m=store(message)
     elif(extract(message)):
         m=extract(message)
+    elif(abuse(message)):
+        m="fuck u don't abuse!!"
     else:
         m="shall i google it"
     send_message(sender_id,m)
@@ -110,38 +112,45 @@ def hello(message):
     hello=["hello","hi","hlo","hllo"]
     
     for i in hello :
-        for j in message :
-            if(i==j):
-                return "hi , good to see u"
+        if i in message :
+            return "hi , good to see u"
 def what(message):
     what=['what','why','how','who','?']
     for i in what :
-        for j in message :
-            if(i==j):
-                return "what do u mean  by "+" ".join(message)
+        if i in message :
+                return "what do u mean  by "+message
 
 def cmd(message):
+    message=message.split(" ")[0]
     if("command"==message):
         return 1
     elif "sultan"==message:
         return message
 def apply_command(message):
-   return commands.getoutput(" ".join(message[1:]))
+   return commands.getoutput(" ".join(message.split(" ")[1:]))
 
 def ls(message):
     
     if("ls"==message[1]):
         with Sultan.load() as f:
-            return " ".join(f.ls(message[2:]).run())
+            return " ".join(f.ls(message.split(" ")[2:]).run())
 def store(message):
+    message=message.split(" ")
     if(message[0]=="save"):
         a[message[1]]=message[2]
         return "info saved !!"
 def extract(message):
-    if(message[0]=="get"):
-        return "info about "+message[0]+" is "+a[message[1]]
+    get=['get','extract','ask']
+    info=['info','']
+    for i in get:
+        
+    if i in message:
+        if j in message:
+        
 
-
+def abuse(message):
+    abuse=["fuck"]
+    if
 
             
 
